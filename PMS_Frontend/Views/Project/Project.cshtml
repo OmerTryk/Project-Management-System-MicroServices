@@ -1,0 +1,98 @@
+﻿@using PMS_Frontend.Models.ViewModels.ProjectVM
+@model DtoProjectUI
+
+@{
+    ViewData["Title"] = "Proje Oluştur";
+    Layout = "_Layout1";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="mb-4 text-center">Proje Oluştur</h2>
+        <form asp-action="CreateProject" asp-controller="Project" method="post">
+
+            <div class="mb-3">
+                <label for="projectName" class="form-label">Proje İsmi</label>
+                <input type="text" class="form-control" id="projectName" name="ProjectName" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Proje Açıklaması</label>
+                <textarea class="form-control" id="description" name="ProjectDescription" rows="4" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Proje Üyeleri</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="nicknameInput" placeholder="Kullanıcı nickname girin">
+                    <select class="form-select" id="roleInput">
+                        <option value="Developer">Developer</option>
+                        <option value="Tester">Tester</option>
+                        <option value="Project Manager">Project Manager</option>
+                    </select>
+                    <button type="button" class="btn btn-success" id="addMember">Ekle</button>
+                </div>
+            </div>
+
+            <ul class="list-group mb-3" id="memberList"></ul>
+
+            <!-- JSON yerine gerçek model binding -->
+            <div id="membersContainer"></div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Projeyi Oluştur</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let members = [];
+        const nicknameInput = document.getElementById("nicknameInput");
+        const roleInput = document.getElementById("roleInput");
+        const addMemberBtn = document.getElementById("addMember");
+        const memberList = document.getElementById("memberList");
+        const membersContainer = document.getElementById("membersContainer");
+
+        addMemberBtn.addEventListener("click", function () {
+            const nickname = nicknameInput.value.trim();
+            const role = roleInput.value;
+
+            if (nickname !== "" && !members.some(m => m.nickname === nickname)) {
+                const member = { MemberName: nickname, Role: role };
+                members.push(member);
+
+                const listItem = document.createElement("li");
+                listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+                listItem.innerHTML = `
+                    ${nickname} - <strong>${role}</strong>
+                    <button class="btn btn-danger btn-sm remove-member">Sil</button>
+                `;
+
+                listItem.querySelector(".remove-member").addEventListener("click", function () {
+                    const index = members.findIndex(m => m.MemberName === nickname);
+                    if (index > -1) {
+                        members.splice(index, 1);
+                        memberList.removeChild(listItem);
+                        renderHiddenInputs();
+                    }
+                });
+
+                memberList.appendChild(listItem);
+                renderHiddenInputs();
+                nicknameInput.value = "";
+            }
+        });
+
+        function renderHiddenInputs() {
+            membersContainer.innerHTML = "";
+            members.forEach((member, index) => {
+                membersContainer.innerHTML += `
+                    <input type="hidden" name="Members[${index}].MemberName" value="${member.MemberName}">
+                    <input type="hidden" name="Members[${index}].Role" value="${member.Role}">
+                `;
+            });
+        }
+    });
+</script>

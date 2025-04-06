@@ -1,0 +1,48 @@
+﻿@using PMS_Frontend.Models.ViewModels.UserVM
+@model IEnumerable<DtoNotification>
+@{
+	ViewData["Title"] = "Home Page";
+	ViewData["ContentName"] = "Home Page";
+	Layout = "_Layout1";
+}
+
+<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Logo</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-bell-fill"></i> Bildirimler
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="notificationDropdown">
+							@foreach (var item in Model)
+							{
+								<li class="dropdown-item" href="#">@item.Content</li>
+							}
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							@ViewBag.UserNickName
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="userDropdown">
+							<li><a class="dropdown-item" href="#">Profil</a></li>
+							<li><a class="dropdown-item" href="#">Ayarlar</a></li>
+							<li><a class="dropdown-item" href="#">Çıkış</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container mt-4">
+		<h1>İçerik Başlığı</h1>
+		<p>Buraya içerik metnini ekleyebilirsiniz. Bu alan dinamik içerik gösterimi için kullanılabilir.</p>
+	</div>
+</div>

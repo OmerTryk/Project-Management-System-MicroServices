@@ -1,0 +1,57 @@
+﻿@using PMS_Frontend.Models.ViewModels.ProjectVM
+
+@{
+    ViewData["Title"] = "ProjectView";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@model IEnumerable<DtoGetProjectContent>
+
+@{
+    ViewData["Title"] = "Projelerim";
+    var nicknames = ViewBag.NickNames as Dictionary<Guid, string>;
+}
+
+<h2>Projelerim</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Proje Adı</th>
+            <th>Açıklama</th>
+            <th>Oluşturan Kişi</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Üyeler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <tr>
+                <td>@project.ProjectName</td>
+                <td>@project.ProjectDescription</td>
+
+                <td>
+                    @(nicknames != null && nicknames.ContainsKey(project.OwnerId)
+                        ? nicknames[project.OwnerId]
+                        : "Bilinmiyor")
+                </td>
+
+                <td>@project.CreatedTime.ToString("dd.MM.yyyy HH:mm")</td>
+
+                <td>
+                    <ul>
+                        @foreach (var member in project.Members ?? new List<DtoGetProjectMember>())
+                        {
+                            <li>
+                                @(nicknames != null && nicknames.ContainsKey(member.UserId)
+                                    ? nicknames[member.UserId]
+                                    : "Bilinmiyor") - @member.Role
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

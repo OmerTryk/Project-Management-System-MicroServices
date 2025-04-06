@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutLR.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>Kayıt Formu</h2>
+    <form asp-action="register" asp-controller="user" method="post">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Ad</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Adınızı girin" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Soyad</label>
+            <input type="text" class="form-control" id="lastName" name="lastname"  placeholder="Soyadınızı girin" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="nickName" class="form-label">Takma Ad</label>
+            <input type="text" class="form-control" id="nickName" name="nickName" placeholder="Takma adınızı girin" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="hashpassword" class="form-label">Şifre</label>
+            <input type="password" class="form-control" id="hashpassword" name="hashpassword" placeholder="Şifrenizi girin" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">E-posta</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kaydol</button>
+        <div class="mb-3">
+            <p><a asp-action="Login" asp-controller="User" class="link-underline-primary">Hesabınız Var Mı?</a></p>
+        </div>
+    </form>
+</div>
