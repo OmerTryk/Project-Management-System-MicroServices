@@ -1,48 +1,218 @@
 ﻿@using PMS_Frontend.Models.ViewModels.UserVM
 @model IEnumerable<DtoNotification>
 @{
-	ViewData["Title"] = "Home Page";
-	ViewData["ContentName"] = "Home Page";
-	Layout = "_Layout1";
+    ViewData["Title"] = "Home Page";
+    ViewData["ContentName"] = "Dashboard";
+    Layout = "_Layout1";
 }
 
-<div class="container-fluid">
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Logo</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-bell-fill"></i> Bildirimler
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="notificationDropdown">
-							@foreach (var item in Model)
-							{
-								<li class="dropdown-item" href="#">@item.Content</li>
-							}
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							@ViewBag.UserNickName
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="userDropdown">
-							<li><a class="dropdown-item" href="#">Profil</a></li>
-							<li><a class="dropdown-item" href="#">Ayarlar</a></li>
-							<li><a class="dropdown-item" href="#">Çıkış</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+<!-- İstatistik Kartları -->
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Toplam Proje
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">7</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-folder fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div class="container mt-4">
-		<h1>İçerik Başlığı</h1>
-		<p>Buraya içerik metnini ekleyebilirsiniz. Bu alan dinamik içerik gösterimi için kullanılabilir.</p>
-	</div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Tamamlanan Görevler
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">14</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Devam Eden Görevler
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">8</div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Okunmamış Mesajlar
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-envelope fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row">
+    <!-- Son Etkinlikler -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Son Etkinlikler</h5>
+                <button class="btn btn-sm btn-outline-primary">Tümünü Gör</button>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Yeni proje oluşturuldu</div>
+                            <span class="text-muted">E-Ticaret Web Sitesi</span>
+                        </div>
+                        <small class="text-muted">2 saat önce</small>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Görev tamamlandı</div>
+                            <span class="text-muted">Frontend arayüz tasarımı</span>
+                        </div>
+                        <small class="text-muted">Dün</small>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Yeni üye eklendi</div>
+                            <span class="text-muted">Ahmet Yılmaz ekibe katıldı</span>
+                        </div>
+                        <small class="text-muted">2 gün önce</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Yaklaşan Görevler -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Yaklaşan Görevler</h5>
+                <button class="btn btn-sm btn-outline-primary">Tümünü Gör</button>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Mobil uygulama geliştirme</div>
+                            <span class="text-muted">Android Sprint 1</span>
+                        </div>
+                        <span class="badge bg-danger rounded-pill">Bugün</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Veritabanı optimizasyonu</div>
+                            <span class="text-muted">Performans iyileştirmeleri</span>
+                        </div>
+                        <span class="badge bg-warning text-dark rounded-pill">3 gün</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Proje sunumu</div>
+                            <span class="text-muted">Müşteri toplantısı için hazırlık</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill">1 hafta</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bildirimler -->
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Bildirimler</h5>
+                <button class="btn btn-sm btn-outline-primary">Tümünü Temizle</button>
+            </div>
+            <div class="card-body p-0">
+                @if (Model != null && Model.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var notification in Model)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                                <div class="ms-2 me-auto">
+                                    <span>@notification.Content</span>
+                                </div>
+                                <button class="btn btn-sm btn-light ms-2">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
+                        <p>Henüz bildiriminiz bulunmamaktadır.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .border-left-primary {
+        border-left: 4px solid var(--primary-color) !important;
+    }
+
+    .border-left-success {
+        border-left: 4px solid var(--success-color) !important;
+    }
+
+    .border-left-info {
+        border-left: 4px solid var(--accent-color) !important;
+    }
+
+    .border-left-warning {
+        border-left: 4px solid var(--warning-color) !important;
+    }
+</style>

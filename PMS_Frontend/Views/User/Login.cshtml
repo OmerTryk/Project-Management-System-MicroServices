@@ -6,29 +6,39 @@
 }
 
 <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-lg p-4" style="width: 400px; border-radius: 12px;">
-        <div class="text-center">
-            <h3 class="mb-4">Giriş Yap</h3>
+    <div class="card shadow-lg p-4" style="width: 420px; border-radius: 15px;">
+        <div class="text-center mb-4">
+            <div class="mx-auto mb-3" style="width: 70px; height: 70px; background-color: #4361ee; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                <i class="fas fa-user-circle fa-3x" style="color: white;"></i>
+            </div>
+            <h3 class="page-title">Hesabınıza Giriş Yapın</h3>
         </div>
 
         <form asp-action="Login" method="post">
-            <div class="form-group mb-3">
-                <label asp-for="NickName" class="form-label"></label>
+            <div class="form-group mb-4">
+                <label asp-for="NickName" class="form-label">Kullanıcı Adı</label>
                 <input asp-for="NickName" class="form-control" placeholder="Kullanıcı adınızı girin" />
                 <span asp-validation-for="NickName" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Password" class="form-label"></label>
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="form-label">Şifre</label>
                 <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi girin" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <div class="d-grid">
+            <div class="d-grid mb-4">
                 <button type="submit" class="btn btn-primary btn-lg">Giriş Yap</button>
             </div>
-            <div class="mb-3">
-                <p><a href="/User/Register" class="link-underline-primary">Hesabınız Yok Mu?</a></p>
+
+            <div class="text-center">
+                <p class="mb-1">
+                    <a href="#" class="text-muted">Şifremi Unuttum</a>
+                </p>
+                <p>
+                    Hesabınız yok mu?
+                    <a href="/User/Register" class="fw-bold">Hemen Kaydolun</a>
+                </p>
             </div>
         </form>
     </div>

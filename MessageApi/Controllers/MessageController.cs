@@ -21,7 +21,7 @@ namespace MessageAPI.Controllers
         public async Task<IActionResult> GetMessageById([FromQuery] Guid id)
         {
             var messages = await _context.Messages
-       .Where(m => m.ReceiverId == id)
+       .Where(m => m.ReceiverId == id || m.SenderId == id)
        .ToListAsync();
             return Ok(messages);
         }

@@ -100,8 +100,9 @@ namespace PMS_Frontend.Controllers
             var messageRequestContent = new StringContent(JsonSerializer.Serialize(createMessage), Encoding.UTF8, "application/json");
 
             await _httpClient.PostAsync($"{ApiUrls.MessageUrl}/create", messageRequestContent);
-
-            return Ok();
+        
+            HttpContext.Session.SetString("LastMessageRecipient", message.NewMessage.ReceiverNickName);
+            return RedirectToAction("Message");
         }
     }
 }
